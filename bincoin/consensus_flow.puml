@@ -1,0 +1,24 @@
+@startuml consensus
+title 比特币网络共识形成流程
+
+participant "节点A" as NodeA
+participant "节点B" as NodeB
+participant "节点C" as NodeC
+database "区块链" as Blockchain
+
+NodeA -> NodeA: 发现新区块
+NodeA -> NodeB: 广播区块
+NodeA -> NodeC: 广播区块
+
+alt 最长链原则
+    NodeB -> NodeB: 验证区块
+    NodeC -> NodeC: 验证区块
+    NodeB -> Blockchain: 接受并更新链
+    NodeC -> Blockchain: 接受并更新链
+else 分叉情况
+    NodeB -> NodeB: 继续跟随最长链
+    NodeC -> NodeC: 继续跟随最长链
+    note right: 等待更多区块\n确认最长链
+end
+
+@enduml 

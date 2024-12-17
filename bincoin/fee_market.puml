@@ -1,0 +1,25 @@
+@startuml fee
+title 交易费用市场机制
+
+actor "用户" as User
+participant "内存池" as Mempool
+participant "矿工" as Miner
+database "区块链" as Blockchain
+
+User -> Mempool: 广播交易\n(包含费用)
+Mempool -> Mempool: 按费率排序
+
+loop 区块生成过程
+    Miner -> Mempool: 选择高费用交易
+    Miner -> Miner: 打包交易到区块
+    note right: 优先选择\n费率高的交易
+    Miner -> Blockchain: 提交新区块
+end
+
+note right of Mempool
+  费用越高
+  越快被打包
+  市场调节机制
+end note
+
+@enduml 

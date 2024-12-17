@@ -1,0 +1,19 @@
+@startuml merkle
+title Merkle树构建流程
+
+participant "交易列表" as Txs
+participant "Merkle树" as Tree
+
+Txs -> Tree: 交易哈希作为叶子节点
+note right: Hash(Tx1..TxN)
+
+loop 直到根节点
+    Tree -> Tree: 相邻节点配对
+    Tree -> Tree: 计算配对哈希
+    note right: Hash(HA + HB)
+end
+
+Tree -> Tree: 生成Merkle根
+note right: 用于区块头
+
+@enduml 

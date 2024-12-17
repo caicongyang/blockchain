@@ -1,0 +1,23 @@
+@startuml doublespend
+title 双重支付防护机制
+
+actor "攻击者" as Attacker
+participant "商家" as Merchant
+database "主链" as MainChain
+database "攻击分支" as AttackChain
+
+Attacker -> Merchant: 发送交易A
+Merchant -> MainChain: 交易A被确认
+Attacker -> AttackChain: 尝试创建包含交易B的分支
+note right: 交易B试图将\n同一比特币\n发送到其他地址
+
+alt 攻击失败场景
+    MainChain -> MainChain: 主链继续增长
+    AttackChain -> AttackChain: 无法超过主链长度
+    note right: 由于算力不足\n攻击分支被放弃
+else 6个确认后
+    Merchant -> Merchant: 交易被认为最终确认
+    note right: 需要付出巨大算力\n才能推翻交易
+end
+
+@enduml 

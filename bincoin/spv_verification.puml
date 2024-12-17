@@ -1,0 +1,22 @@
+@startuml spv
+title 简化支付验证(SPV)流程
+
+participant "轻节点" as LightNode
+participant "全节点" as FullNode
+database "区块链" as Blockchain
+
+LightNode -> FullNode: 请求区块头
+FullNode -> LightNode: 返回区块头链
+LightNode -> LightNode: 验证最长链\n和工作量证明
+
+LightNode -> FullNode: 请求交易Merkle路径
+FullNode -> LightNode: 返回Merkle证明
+LightNode -> LightNode: 验证交易存在性
+
+note right of LightNode
+  只下载区块头
+  不存储完整区块
+  验证交易包含性
+end note
+
+@enduml 

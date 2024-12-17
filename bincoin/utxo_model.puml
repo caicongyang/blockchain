@@ -1,0 +1,16 @@
+@startuml utxo
+title UTXO交易模型
+
+database "UTXO集合" as UTXO
+actor "用户" as User
+participant "交易" as Tx
+
+User -> UTXO: 查找可用UTXO
+User -> Tx: 创建新交易
+Tx -> Tx: 指定输入UTXO
+Tx -> Tx: 创建新的输出
+note right: 支付金额\n找零金额
+User -> Tx: 签名交易
+Tx -> UTXO: 更新UTXO集合
+
+@enduml 

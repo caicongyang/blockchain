@@ -1,0 +1,23 @@
+@startuml reward
+title 区块奖励计算流程
+
+start
+:计算当前区块高度;
+:确定当前奖励周期;
+note right: 每21万个区块\n奖励减半一次
+
+if (区块高度 < 210000) then
+  :奖励 = 50 BTC;
+else if (区块高度 < 420000) then
+  :奖励 = 25 BTC;
+else if (区块高度 < 630000) then
+  :奖励 = 12.5 BTC;
+else
+  :奖励 = 6.25 BTC;
+endif
+
+:添加交易费用;
+:生成Coinbase交易;
+stop
+
+@enduml 

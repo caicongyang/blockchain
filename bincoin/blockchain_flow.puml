@@ -1,0 +1,19 @@
+@startuml blockchain
+
+title 区块链形成流程
+
+database "创世区块" as Genesis #lightblue
+database "区块1" as Block1 #lightblue
+database "区块2" as Block2 #lightblue
+database "区块3" as Block3 #lightblue
+
+Genesis -[#black]-> Block1: 包含前块哈希
+Block1 -[#black]-> Block2: 包含前块哈希  
+Block2 -[#black]-> Block3: 包含前块哈希
+
+note bottom of Genesis: 时间戳\n交易记录\n随机数
+note bottom of Block1: 时间戳\n交易记录\n随机数
+note bottom of Block2: 时间戳\n交易记录\n随机数
+note bottom of Block3: 时间戳\n交易记录\n随机数
+
+@enduml 

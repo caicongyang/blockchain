@@ -1,0 +1,47 @@
+
+
+
+# PlantUML 临时文件
+*.png.tmp
+
+# 操作系统文件
+.DS_Store
+Thumbs.db
+
+# 编辑器/IDE文件
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# 日志文件
+*.log
+
+# 临时文件
+*.tmp
+*.temp
+
+# Node.js (如果使用)
+node_modules/
+npm-debug.log*
+
+# Python (如果使用)
+__pycache__/
+*.py[cod]
+*.so
+.Python
+env/
+venv/
+
+# Java (如果使用)
+*.class
+*.jar
+target/
+
+# 其他
+.env
+.env.local
+.env.*.local 
+
+/.history

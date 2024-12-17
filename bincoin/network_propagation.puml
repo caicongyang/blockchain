@@ -1,0 +1,26 @@
+@startuml network
+title 比特币网络传播机制
+
+participant "节点A" as NodeA
+participant "节点B" as NodeB
+participant "节点C" as NodeC
+participant "节点D" as NodeD
+
+NodeA -> NodeB: inv消息(交易/区块哈希)
+NodeA -> NodeC: inv消息(交易/区块哈希)
+
+alt 节点没有该数据
+    NodeB -> NodeA: getdata请求
+    NodeA -> NodeB: 发送完整数据
+    NodeB -> NodeD: 继续传播inv消息
+else 节点已有该数据
+    NodeC -> NodeC: 忽略inv消息
+end
+
+note right of NodeA
+  洪泛式传播
+  避免重复传输
+  快速同步
+end note
+
+@enduml 

@@ -1,0 +1,19 @@
+@startuml mining
+title 比特币挖矿流程
+
+participant "矿工" as Miner
+participant "比特币网络" as Network
+database "区块链" as Blockchain
+
+Miner -> Miner: 收集未确认交易
+Miner -> Miner: 组装新区块
+loop 直到找到有效哈希
+    Miner -> Miner: 改变随机数(Nonce)
+    Miner -> Miner: 计算区块哈希
+end
+Miner -> Network: 广播新区块
+Network -> Network: 验证区块
+Network -> Blockchain: 将区块加入链
+Miner -> Miner: 获得区块奖励
+
+@enduml 

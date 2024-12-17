@@ -1,0 +1,16 @@
+@startuml transaction
+title 比特币交易流程
+
+actor "付款方" as Sender
+actor "收款方" as Receiver
+participant "比特币网络" as Network
+database "区块链" as Blockchain
+
+Sender -> Sender: 创建交易(包含收款方公钥)
+Sender -> Sender: 用私钥签名交易
+Sender -> Network: 广播交易
+Network -> Network: 验证交易
+Network -> Blockchain: 打包到新区块
+Blockchain -> Receiver: 收款方可以验证和使用比特币
+
+@enduml 

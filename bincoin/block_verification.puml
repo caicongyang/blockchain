@@ -1,0 +1,24 @@
+@startuml verification
+title 区块验证流程
+
+participant "节点" as Node
+database "本地区块链" as LocalChain
+participant "其他节点" as OtherNodes
+
+Node -> Node: 接收新区块
+activate Node
+
+Node -> Node: 验证区块格式
+Node -> Node: 验证区块头哈希
+Node -> Node: 验证工作量证明
+
+alt 验证通过
+    Node -> LocalChain: 添加到本地链
+    Node -> OtherNodes: 转发区块
+else 验证失败
+    Node -> Node: 拒绝该区块
+end
+
+deactivate Node
+
+@enduml 
