@@ -7,7 +7,7 @@
 目前项目包含以下主要部分：
 
 - bitcoin/：比特币相关内容
-  - index.md：比特币核心概念和流程
+  - [index.md](bitcoin/index.md)：比特币核心概念和流程
   - 各种流程图的 PlantUML 源文件
   
 - ethereum/：以太坊相关内容（计划中）
