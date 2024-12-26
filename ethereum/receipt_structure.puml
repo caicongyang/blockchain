@@ -1,0 +1,19 @@
+@startuml receipt
+title 交易收据结构
+
+database "交易收据" as Receipt
+participant "事件日志" as Logs
+participant "状态" as State
+
+Receipt -> Receipt: 交易后状态根
+Receipt -> Receipt: 累计Gas使用量
+Receipt -> Receipt: Bloom过滤器
+
+Receipt -> Logs: 事件日志1
+Receipt -> Logs: 事件日志2
+note right: 合约执行\n产生的事件
+
+Logs -> State: 记录状态变化
+note right: 用于DApp\n查询和索引
+
+@enduml 

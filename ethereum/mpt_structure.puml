@@ -1,0 +1,30 @@
+@startuml mpt
+title MPT树结构
+
+participant "根节点" as Root
+participant "分支节点" as Branch
+participant "扩展节点" as Extension
+participant "叶子节点" as Leaf
+
+Root -> Branch: 16路分支
+Branch -> Extension: 压缩路径
+Extension -> Leaf: 存储数据
+Branch -> Branch: 其他分支
+Branch -> Leaf: 直接存储
+
+note right of Branch
+  16个分支 +
+  1个值字段
+end note
+
+note right of Extension
+  共享前缀路径
+  优化存储空间
+end note
+
+note right of Leaf
+  键值对数据
+  RLP编码
+end note
+
+@enduml 

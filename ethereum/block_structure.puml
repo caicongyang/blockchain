@@ -1,0 +1,30 @@
+@startuml block
+title 以太坊区块结构
+
+database "区块头" as Header
+database "交易列表" as TxList
+database "叔块头列表" as Uncles
+
+Header -> Header: 父区块哈希
+Header -> Header: 状态根
+Header -> Header: 交易树根
+Header -> Header: 收据树根
+Header -> Header: 难度
+Header -> Header: 时间戳
+Header -> Header: Nonce
+
+note right of Header
+  - 状态根：MPT树根哈希
+  - 交易树：所有交易的MPT树
+  - 收据树：所有收据的MPT树
+end note
+
+TxList -> TxList: 交易1
+TxList -> TxList: 交易2
+TxList -> TxList: ...
+
+Uncles -> Uncles: 叔块1
+Uncles -> Uncles: 叔块2
+note right: 网络延迟导致的\n有效竞争区块
+
+@enduml 

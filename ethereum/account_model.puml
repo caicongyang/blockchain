@@ -1,0 +1,23 @@
+@startuml account
+title 以太坊账户模型
+
+database "外部账户(EOA)" as EOA #lightblue
+database "合约账户" as Contract #lightgreen
+
+note right of EOA
+  - 由私钥控制
+  - 可以发送交易
+  - 包含以太币余额
+end note
+
+note right of Contract
+  - 由代码控制
+  - 包含合约代码
+  - 有状态和余额
+end note
+
+EOA -> Contract: 调用合约
+Contract -> Contract: 内部调用
+EOA -> EOA: 转账以太币
+
+@enduml 

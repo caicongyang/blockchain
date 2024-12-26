@@ -1,0 +1,23 @@
+@startuml state
+title 以太坊状态转换
+
+database "世界状态" as State
+participant "交易" as Tx
+participant "状态转换函数" as STF
+
+State -> State: 初始状态
+Tx -> STF: 输入交易
+STF -> STF: 验证签名和Nonce
+STF -> STF: 检查余额
+STF -> STF: 执行代码
+STF -> State: 更新状态
+
+note right of State
+  状态包含:
+  - 账户余额
+  - 合约代码
+  - 合约存储
+  - Nonce值
+end note
+
+@enduml 

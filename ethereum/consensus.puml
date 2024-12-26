@@ -1,0 +1,29 @@
+@startuml consensus
+title 以太坊共识机制(PoS)
+
+participant "验证者" as Validator
+participant "信标链" as Beacon
+database "区块链" as Blockchain
+
+Validator -> Validator: 质押32 ETH
+Validator -> Beacon: 注册成为验证者
+
+loop 每个时隙
+    Beacon -> Validator: 选择区块提议者
+    Validator -> Validator: 创建区块
+    Validator -> Beacon: 提交区块
+    
+    loop 验证过程
+        Beacon -> Beacon: 收集证明
+        note right: 其他验证者投票
+    end
+    
+    alt 达成共识
+        Beacon -> Blockchain: 确认区块
+        Validator -> Validator: 获得奖励
+    else 作恶行为
+        Beacon -> Validator: 惩罚质押
+    end
+end
+
+@enduml 

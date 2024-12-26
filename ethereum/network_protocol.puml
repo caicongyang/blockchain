@@ -1,0 +1,30 @@
+@startuml network
+title 以太坊网络协议
+
+participant "节点A" as NodeA
+participant "节点B" as NodeB
+database "区块链" as Blockchain
+
+NodeA -> NodeB: 握手(协议版本、网络ID)
+activate NodeB
+
+NodeA -> NodeB: Status消息
+note right: 交换链信息
+NodeB -> NodeA: Status响应
+
+loop 区块同步
+    NodeA -> NodeB: GetBlockHeaders
+    NodeB -> NodeA: BlockHeaders
+    
+    alt 需要区块体
+        NodeA -> NodeB: GetBlockBodies
+        NodeB -> NodeA: BlockBodies
+    end
+end
+
+NodeA -> NodeB: 新交易广播
+NodeB -> Blockchain: 验证并转发
+
+deactivate NodeB
+
+@enduml 

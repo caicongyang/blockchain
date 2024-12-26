@@ -1,0 +1,27 @@
+@startuml contract
+title 智能合约执行流程
+
+actor "用户" as User
+participant "以太坊节点" as Node
+participant "EVM" as EVM
+database "区块链" as Blockchain
+
+User -> Node: 发送交易
+Node -> EVM: 执行合约代码
+activate EVM
+
+EVM -> EVM: 检查Gas限制
+EVM -> EVM: 执行操作码
+note right: 状态转换
+
+alt 执行成功
+    EVM -> Blockchain: 更新状态
+    EVM -> User: 返回结果
+else Gas不足或错误
+    EVM -> EVM: 回滚状态
+    EVM -> User: 返回错误
+end
+
+deactivate EVM
+
+@enduml 

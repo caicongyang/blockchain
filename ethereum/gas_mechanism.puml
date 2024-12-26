@@ -1,0 +1,28 @@
+@startuml gas
+title Gas机制流程
+
+actor "用户" as User
+participant "交易" as Tx
+participant "矿工" as Miner
+database "区块链" as Blockchain
+
+User -> Tx: 设置Gas限制和价格
+Tx -> Miner: 提交交易
+activate Miner
+
+Miner -> Miner: 执行交易
+note right: 消耗Gas
+
+alt Gas充足
+    Miner -> User: 退还剩余Gas
+    Miner -> Miner: 收取Gas费用
+    Miner -> Blockchain: 确认交易
+else Gas不足
+    Miner -> Miner: 回滚状态
+    Miner -> User: 消耗所有Gas
+    note right: 防止DOS攻击
+end
+
+deactivate Miner
+
+@enduml 
