@@ -11,7 +11,7 @@
   - 各种流程图的 PlantUML 源文件
   
 - ethereum/：以太坊相关内容（计划中）
-  - index.md：以太坊核心概念和流程
+  - [index.md](ethereum/index.md)：以太坊核心概念和流程
   - 智能合约相关流程图
 
 ## 内容组织
